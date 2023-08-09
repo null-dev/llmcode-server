@@ -1,0 +1,33 @@
+[package]
+name = "llmcode-server"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+eyre = "0.6"
+axum = "0.6"
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1", features = ["derive"] }
+scopeguard = "1.2"
+
+[dependencies.pyo3]
+version = "0.19.2"
+features = ["auto-initialize"]
+
+# Abort on panic
+[profile.dev]
+panic = "abort"
+[profile.release]
+panic = "abort"
+
+#[dependencies.llm]
+#git = "https://github.com/rustformers/llm"
+#branch = "main"
+#default-features = false
+#features = ["cublas", "gpt2"]
+
+# Build GGML in release mode for perf
+#[profile.dev.package.ggml-sys]
+#opt-level = 3

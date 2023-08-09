@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  llmcode:
+    container_name: llmcode
+    restart: always
+    volumes:
+      - './data:/data'
+    ports:
+      - '10.69.0.35:4040:80'
+    image: 'nulldev/llmcode'
+    build:
+      context: '.'
+      dockerfile: 'docker/Dockerfile'
+    ulimits:
+      memlock: -1
+    mem_limit: 30gb
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ['0']
+              capabilities: [gpu]
